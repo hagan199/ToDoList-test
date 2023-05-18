@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>My To Do App</title>
+</head>
+
+<body>
+  <header>
+    <h2 class="title">My To Do App</h2>
+    <hr>
+  </header>
+
+  <main>
+    <form class="addTaskForm">
+      <input id="input" type="text" class="addInput" placeholder="Add to your list..." aria-label="Add task input">
+      <button class="addBtn" type="submit" aria-label="Add task button">&#8617;</button>
+    </form>
+
+    <hr>
+
+    <ul class="myTasksList">
+    </ul>
+
+    <button class="btn" id="remove">Clear completed tasks</button>
+  </main>
+
+  <script defer src="index.js"></script>
+</body>
+
+</html>
