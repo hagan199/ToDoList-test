@@ -20,6 +20,16 @@ addTask.addEventListener('keydown', (event) => {
   }
 });
 
+// EDIT A TASK
+mytaskList.addEventListener('click', (event) => {
+  const textInput = event.target.closest('.input-text');
+  if (textInput) {
+    const textInputs = mytaskList.querySelectorAll('.input-text');
+    const index = Array.from(textInputs).indexOf(textInput);
+    editTask(index);
+  }
+});
+
 // DELETE A TASK
 const mytaskList = document.querySelector('.myTasksList');
 
@@ -32,15 +42,6 @@ mytaskList.addEventListener('click', (event) => {
   }
 });
 
-// EDIT A TASK
-mytaskList.addEventListener('click', (event) => {
-  const textInput = event.target.closest('.input-text');
-  if (textInput) {
-    const textInputs = mytaskList.querySelectorAll('.input-text');
-    const index = Array.from(textInputs).indexOf(textInput);
-    editTask(index);
-  }
-});
 
 // FIRST DISPLAY TASK WHEN THE PAGE LOADS
 window.onload = displayTask;
