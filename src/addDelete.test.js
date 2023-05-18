@@ -1,8 +1,7 @@
 import { addTasks, deleteTask } from './modules/displayTask.js';
 
 // set up the initial container with zero tasks
-document.body.innerHTML =
-  '<div class="main"><header>Todays To Do</header><hr><div class="addInput-container"><input type="text" class="addInput" placeholder="Press enter key to Add to your list..."><div class="addBtn">&#8617;</div></div><hr><div class="myTasksList"><!-- here all the content will be created dinamically  --></div><footer class="clrBtn">Clear all completed</footer></div>';
+document.body.innerHTML = '<div class="main"><header>Todays To Do</header><hr><div class="addInput-container"><input type="text" class="addInput" placeholder="Press enter key to Add to your list..."><div class="addBtn">&#8617;</div></div><hr><div class="myTasksList"><!-- here all the content will be created dinamically  --></div><footer class="clrBtn">Clear all completed</footer></div>';
 const container = document.querySelector('.myTasksList');
 
 describe('add function', () => {
