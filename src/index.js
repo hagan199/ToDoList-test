@@ -1,47 +1,82 @@
+// Importing CSS styles and modules
 import './style.css';
+import displayTask from './modules/displayTask.js';
+import { updateTask, deleteTask, editTask } from './modules/statusUpdate.js';
+import { completedTasks } from './modules/completedTasks.js';
 
-import {
-  addTasks, displayTask, deleteTask, editTask,
-} from './modules/displayTask.js';
+// Selecting DOM elements
+const myTaskList = document.querySelector('#myTaskList');
+const inputTask = document.querySelector('.input');
+const Form = document.querySelector('.form');
+const btn = document.querySelector('.btn');
 
-// ADD A NEW TASK
-const addButton = document.querySelector('.addBtn'); // clicking add button
-addButton.addEventListener('click', () => {
-  const addTask = document.querySelector('.addInput');
-  addTasks(addTask.value);
-});
+let taskList = [];
 
-const addTask = document.querySelector('.addInput'); // typing enter key
-addTask.addEventListener('keydown', (event) => {
-  if (event.keyCode === 13) {
-    const taskValue = addTask.value;
-    addTasks(taskValue);
-    displayTask();
+// Function to retrieve tasks from local storage
+function getTasks() {
+  if (localStorage.getItem('Tasks')) {
+    taskList = JSON.parse(localStorage.getItem('Tasks'));
   }
-});
+}
 
-// EDIT A TASK
-mytaskList.addEventListener('click', (event) => {
-  const textInput = event.target.closest('.input-text');
-  if (textInput) {
-    const textInputs = mytaskList.querySelectorAll('.input-text');
-    const index = Array.from(textInputs).indexOf(textInput);
-    editTask(index);
+getTasks();
+
+// Function to add a task to the task list array
+function addTaskToList(Task) {
+  taskList.push(Task);
+}
+
+// Function to handle adding a task
+function addTask() {
+  Form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    getTasks();
+    // Creating a new task object and adding it to the task list
+    addTaskToList({
+      discription: inputTask.value,
+      index: taskList.length !== 0 ? taskList[taskList.length - 1].index + 1 : 1,
+      completed: false,
+    });
+    // Storing the updated task list in local storage
+    localStorage.setItem('Tasks', JSON.stringify(taskList));
+    getTasks();
+    // Displaying the updated task list
+    displayTask(taskList, myTaskList);
+    // Updating task status
+    updateTask(taskList, displayTask, myTaskList);
+    inputTask.value = '';
+  });
+}
+
+// Function to clear completed tasks from the task list
+function clearCompleted(taskList) {
+  const newK = taskList.filter((item) => !item.completed);
+  for (let i = 0; i < newK.length; i += 1) {
+    newK[i].index = i + 1;
   }
+
+  return newK;
+}
+
+// Event listener for the button click to clear completed tasks
+btn.addEventListener('click', () => {
+  getTasks();
+  // Clearing completed tasks and updating the task list in local storage
+  taskList = clearCompleted(taskList);
+  localStorage.setItem('Tasks', JSON.stringify(taskList));
+
+  // Displaying the updated task list
+  displayTask(taskList, myTaskList);
+  // Updating task status
+  updateTask(taskList, displayTask, myTaskList);
 });
 
-// DELETE A TASK
-const mytaskList = document.querySelector('.myTasksList');
+// Calling functions to initialize and display the task list
+addTask();
+displayTask(taskList, myTaskList);
+updateTask(taskList, displayTask, myTaskList);
 
-mytaskList.addEventListener('click', (event) => {
-  const deleteTaskIcon = event.target.closest('.delete-task-icon');
-  if (deleteTaskIcon) {
-    const deleteTaskIcons = mytaskList.querySelectorAll('.delete-task-icon');
-    const index = Array.from(deleteTaskIcons).indexOf(deleteTaskIcon);
-    deleteTask(index);
-  }
-});
-
-
-// FIRST DISPLAY TASK WHEN THE PAGE LOADS
-window.onload = displayTask;
+// Exporting functions for external use
+export {
+  addTaskToList, deleteTask, completedTasks, addTask, editTask,
+};
