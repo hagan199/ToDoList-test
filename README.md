@@ -106,7 +106,9 @@ Run the index.html with your preferred browser.
 - LinkedIn: [Obi Anthony](https://www.linkedin.com/in/obi-anthony-440a1430/)
 
 👤 **Emmanuel Hagan**
-GitHub: [@hagan199](https://github.com/hagan199)
+
+- GitHub: [@hagan199](https://github.com/hagan199)
+- Twitter: [@Emmahagan23](https://twitter.com/Emmahagan23)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
