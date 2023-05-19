@@ -2,31 +2,28 @@ jest.mock('../index');
 
 const { addTaskToList, deleteTask } = require('../index.js');
 
-describe('Todo List Operations', () => {
-  test('should add an item to the list', () => {
-    const taskToAdd = {
-      description: 'test description',
-      index: 1,
-      completed: false,
-    };
-
-    const expectedListAfterAddition = [taskToAdd];
-    const actualListAfterAddition = addTaskToList(taskToAdd);
-
-    expect(actualListAfterAddition).toEqual(expectedListAfterAddition);
+describe('Add and Remove Todo', () => {
+  test('should add items', () => {
+    expect(addTaskToList(
+      {
+        discription: 'test description',
+        index: 1,
+        completed: false,
+      },
+    )).toStrictEqual([
+      {
+        discription: 'test description',
+        index: 1,
+        completed: false,
+      },
+    ]);
   });
 
-  test('should delete an item from the list', () => {
-    const taskToDelete = {
-      description: 'test description',
+  test('should delete item', () => {
+    expect(deleteTask({
+      discription: 'test description',
       index: 1,
       completed: false,
-    };
-
-    const initialList = [taskToDelete];
-    const expectedListAfterDeletion = [];
-    const actualListAfterDeletion = deleteTask(taskToDelete);
-
-    expect(actualListAfterDeletion).toEqual(expectedListAfterDeletion);
+    })).toStrictEqual([]);
   });
 });
