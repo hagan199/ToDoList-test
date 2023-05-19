@@ -21,7 +21,7 @@ const StatusComplete = (
   myTaskList,
   displayTask,
   updateTask,
-  Task
+  Task,
 ) => {
   CompletedBox.addEventListener('change', () => {
     // Updating the task list with the completion status change
